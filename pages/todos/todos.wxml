@@ -1,0 +1,20 @@
+<view class="container">
+    <view class="header">
+        <image src="../../images/add.png" bindtap="setTodo"/>
+        <input type="text" placeholder="{{search}}" bindinput="updateSearch" />
+    </view>
+
+    <view class="todos">
+        <view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index">
+            <icon type="{{item.completed ? 'success' : 'circle'}}" bindtap="setStyle"/>
+            <text>{{item.name}}</text>
+            <icon type="clear" size="16"/>
+        </view>
+    </view>
+
+    <view class="footer">
+        <text>全部</text>
+        <text>{{todos.length}} item left</text>
+        <text>clear completed</text>
+    </view>
+</view>
