@@ -1,12 +1,8 @@
 Page({
   data: {
     input: '',
-    todos: [
-      {name: 'Learning HTML', completed: true},
-      {name: 'Learning CSS', completed: false},
-      {name: 'Learning JavaScript', completed: true},
-    ],
-    amount: 1,
+    todos: [],
+    amount: 0,
     all: false
   },
   updateSearch: function(e) {
@@ -17,15 +13,16 @@ Page({
   setTodo: function(){
     if(!this.data.input) return
     let todos = this.data.todos
-    this.data.todos.push({
+    todos.push({
       name: this.data.input,
       completed: false
     })
+    console.log(this.data.input)
     this.setData({
       todos: todos,
       input: '',
       amount: this.data.amount + 1
-    }) 
+    })
   },
   scheduleManage: function(e){
     let index = e.currentTarget.dataset.index
@@ -54,8 +51,10 @@ Page({
     todos.forEach(function (item) {
       item.completed = that.data.all
     })
+    let amount = this.data.all ? 0 : this.data.todos.length
     this.setData({
-      todos: todos
+      todos: todos,
+      amount: amount
     })
   },
   clearTodo: function(){

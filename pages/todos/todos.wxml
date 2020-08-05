@@ -1,20 +1,25 @@
 <view class="container">
-    <view class="header">
-        <image src="../../images/add.png" bindtap="setTodo"/>
-        <input type="text" placeholder="{{search}}" bindinput="updateSearch" />
-    </view>
+	<view class="header">
+		<image src="../../images/add.png" />
+		<input type="text" placeholder="hello world" value="{{input}}"  bindconfirm="setTodo" bindinput="updateSearch" />
+	</view> 
 
-    <view class="todos">
-        <view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index" bindtap="scheduleManage" data-index="{{index}}">
-            <icon type="{{item.completed ? 'success' : 'circle'}}" bindtap="setStyle"/>
-            <text>{{item.name}}</text>
-            <icon type="clear" size="16" catchtap="removeTodo" data-index="{{index}}"/>
-        </view>
-    </view>
+	<block wx:if="{{todos.length}}">
+		<view class="todos">
+			<view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index" bindtap="scheduleManage" data-index="{{index}}">
+				<icon type="{{item.completed ? 'success' : 'circle'}}" bindtap="setStyle" />
+				<text>{{item.name}}</text>
+				<icon type="clear" size="16" catchtap="removeTodo" data-index="{{index}}" />
+			</view>
+		</view>
 
-    <view class="footer">
-        <text bindtap="toggleAll">Toggle All</text>
-        <text wx:if="{{amount}}">{{amount}} {{amount > 1 ? 'items' : 'item'}} left</text>
-        <text bindtap="clearTodo">clear completed</text>
+		<view class="footer">
+			<text bindtap="toggleAll">Toggle All</text>
+			<text wx:if="{{amount}}">{{amount}} {{amount > 1 ? 'items' : 'item'}} left</text>
+			<text bindtap="clearTodo">clear completed</text>
+		</view>
+	</block>
+    <view class="null" wx:else>
+        data null
     </view>
 </view>
