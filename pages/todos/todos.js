@@ -40,7 +40,7 @@ Page({
   removeTodo: function(e){
     let index = e.currentTarget.dataset.index
     let todos = this.data.todos
-    let item = todos.splice(index, 1)
+    let item = todos.splice(index, 1)[0]
     let amount = this.data.amount - (item.completed ? 0 : 1)
     this.setData({
       todos: todos,
