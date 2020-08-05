@@ -5,7 +5,7 @@
     </view>
 
     <view class="todos">
-        <view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index">
+        <view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index" bindtap="scheduleManage" data-index="{{index}}">
             <icon type="{{item.completed ? 'success' : 'circle'}}" bindtap="setStyle"/>
             <text>{{item.name}}</text>
             <icon type="clear" size="16"/>
@@ -14,7 +14,7 @@
 
     <view class="footer">
         <text>全部</text>
-        <text>{{todos.length}} item left</text>
+        <text wx:if="{{amount}}">{{amount}} {{amount > 1 ? 'items' : 'item'}} left</text>
         <text>clear completed</text>
     </view>
 </view>
