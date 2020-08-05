@@ -6,14 +6,15 @@ Page({
       {name: 'Learning CSS', completed: false},
       {name: 'Learning JavaScript', completed: true},
     ],
-    amount: 1
+    amount: 1,
+    all: false
   },
   updateSearch: function(e) {
     this.setData({
       input: e.detail.value
     })
   },
-  setTodo: function(e){
+  setTodo: function(){
     if(!this.data.input) return
     let todos = this.data.todos
     this.data.todos.push({
@@ -34,6 +35,35 @@ Page({
     this.setData({
       todos: this.data.todos,
       amount: amount
+    })
+  },
+  removeTodo: function(e){
+    let index = e.currentTarget.dataset.index
+    let todos = this.data.todos
+    let item = todos.splice(index, 1)
+    let amount = this.data.amount - (item.completed ? 0 : 1)
+    this.setData({
+      todos: todos,
+      amount: amount
+    })
+  },
+  toggleAll: function(){
+    let that = this
+    this.data.all = !this.data.all
+    let todos = this.data.todos
+    todos.forEach(function (item) {
+      item.completed = that.data.all
+    })
+    this.setData({
+      todos: todos
+    })
+  },
+  clearTodo: function(){
+    let todos = this.data.todos.filter(function(item){
+      return !item.completed
+    })
+    this.setData({
+      todos: todos
     })
   }
 })

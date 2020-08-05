@@ -8,13 +8,13 @@
         <view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index" bindtap="scheduleManage" data-index="{{index}}">
             <icon type="{{item.completed ? 'success' : 'circle'}}" bindtap="setStyle"/>
             <text>{{item.name}}</text>
-            <icon type="clear" size="16"/>
+            <icon type="clear" size="16" catchtap="removeTodo" data-index="{{index}}"/>
         </view>
     </view>
 
     <view class="footer">
-        <text>全部</text>
+        <text bindtap="toggleAll">Toggle All</text>
         <text wx:if="{{amount}}">{{amount}} {{amount > 1 ? 'items' : 'item'}} left</text>
-        <text>clear completed</text>
+        <text bindtap="clearTodo">clear completed</text>
     </view>
 </view>
