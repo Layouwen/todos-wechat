@@ -69,4 +69,5 @@
     display: flex;
     justify-content: center;
     margin: 20rpx;
+    color: red;
 }
