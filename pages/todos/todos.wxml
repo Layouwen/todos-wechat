@@ -1,25 +1,30 @@
 <view class="container">
-	<view class="header">
-		<image src="../../images/add.png" />
-		<input type="text" placeholder="hello world" value="{{input}}"  bindconfirm="setTodo" bindinput="updateSearch" />
-	</view> 
-
-	<block wx:if="{{todos.length}}">
-		<view class="todos">
-			<view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index" bindtap="scheduleManage" data-index="{{index}}">
-				<icon type="{{item.completed ? 'success' : 'circle'}}" bindtap="setStyle" />
-				<text>{{item.name}}</text>
-				<icon type="clear" size="16" catchtap="removeTodo" data-index="{{index}}" />
-			</view>
-		</view>
-
-		<view class="footer">
-			<text bindtap="toggleAll">Toggle All</text>
-			<text wx:if="{{amount}}">{{amount}} {{amount > 1 ? 'items' : 'item'}} left</text>
-			<text bindtap="clearTodo">clear completed</text>
-		</view>
-	</block>
-    <view class="null" wx:else>
-        data null
+    <view class="header">
+        <image src="../../images/add.png"/>
+        <input type="text" placeholder="请输入你的任务内容" value="{{input}}" bindconfirm="setTodo" bindinput="updateSearch"/>
     </view>
+    <!--    判断是否有数据-->
+    <block wx:if="{{todos.length}}">
+        <view class="todos">
+            <!-- 如果值为true则显示样式，否则不给样式 -->
+            <!-- 将每项的index保存给对应选项，以便切换完成状态 -->
+            <view class="item {{item.completed ? 'completed' : ''}}" wx:for="{{todos}}" wx:key="index"
+                  bindtap="scheduleManage" data-index="{{index}}">
+                <!-- 如果为true则显示成功的图标，否则显示空心 -->
+                <icon type="{{item.completed ? 'success' : 'circle'}}" bindtap="setStyle"/>
+                <text>{{item.name}}</text>
+                <!-- 保存index，以便删除对应的选项 -->
+                <icon type="clear" size="16" catchtap="removeTodo" data-index="{{index}}"/>
+            </view>
+        </view>
+        <view class="footer">
+            <text bindtap="toggleAll">全选</text>
+            <!-- 如果剩余数量大于1则显示items，否则显示item -->
+            <!--            <text wx:if="{{amount}}">{{amount}} {{amount > 1 ? "items" : "item"}} left</text>-->
+            <text wx:if="{{amount}}">还剩 {{amount}} 项</text>
+            <text bindtap="clearTodo">清除已完成</text>
+        </view>
+    </block>
+    <!--    没有数据时显示-->
+    <view class="null" wx:else>暂无内容</view>
 </view>
